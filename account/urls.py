@@ -7,8 +7,6 @@ router = DefaultRouter()
 router.register('list',CustomUserViewset)
 router.register('review',ReviewViewSet)
 
-
-
 urlpatterns = [
     path('', include(router.urls)),
     path('register/', UserRegistrationApiView.as_view(),name='register'),
