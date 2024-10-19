@@ -27,7 +27,15 @@ Django, Django Rest Framework (DRF), PostgreSQL.
 🌐 Deployment: API Deployed using Vercel.
 
 GitHub!
-Frontend: https://github.com/asirff399/SoftHeal
-Frontend live link: https://softheal.netlify.app
 
-API live link: https://soft-heal.vercel.app/
+Frontend: 
+
+    https://github.com/asirff399/SoftHeal
+
+Frontend live link:
+
+    https://softheal.netlify.app
+
+API live link:
+
+    https://soft-heal.vercel.app/
