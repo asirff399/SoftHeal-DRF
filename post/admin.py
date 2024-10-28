@@ -5,7 +5,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ['name','image','post_type','created_on','target','collected']
 
 class DonationAdmin(admin.ModelAdmin):
-    list_display = ['user__username','post__name','donated_on','amount','balance_after_donation']
+    list_display = ['user__username','post__name','donated_on','amount']
 
 class PostTypeAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}

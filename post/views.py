@@ -14,6 +14,9 @@ from django.utils import timezone
 from django_filters import rest_framework as django_filters
 from rest_framework import filters, pagination
 from decimal import Decimal,InvalidOperation
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import NotAuthenticated
+
 
 class PostViewset(viewsets.ModelViewSet):   
     queryset = Post.objects.all()
@@ -27,9 +30,15 @@ class PostTypeViewset(viewsets.ModelViewSet):
 
 class DonationViewset(viewsets.ModelViewSet):
     queryset = Donation.objects.all()
-    filter_backends = [filters.SearchFilter]
     serializer_class = DonationSerializer
-    search_fields = ['user__id','post__name']
+    # permission_classes = [IsAuthenticated]
+    # filter_backends = [filters.SearchFilter]
+    # search_fields = ['user__id','post__name']
+
+    def get_queryset(self):
+        user = self.request.user
+        return Donation.objects.filter(user=user)
+
 
 class PostList(APIView):
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly] 
@@ -72,43 +81,3 @@ class PostDetails(APIView):
         post = self.get_object(pk)
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-from decimal import Decimal
-
-class DonationAPIView(APIView):
-    def put(self, request, post_id, format=None):
-        post = get_object_or_404(Post, id=post_id)
-        custom_user = get_object_or_404(CustomUser, user=request.user)
-        amount = request.data.get('amount')
-
-        try:
-            # Convert amount to a decimal instead of float
-            amount = Decimal(amount)
-        except (ValueError, InvalidOperation):
-            return Response({"error": "Invalid donation amount."}, status=status.HTTP_400_BAD_REQUEST)
-
-        if amount <= 0:
-            return Response({"error": "Donation amount must be greater than zero."}, status=status.HTTP_400_BAD_REQUEST)
-
-        if custom_user.balance < amount:
-            return Response({"error": "Insufficient balance."}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Deduct the amount from the user's balance
-        custom_user.balance -= amount
-        custom_user.save()
-
-        # Add the amount to the post's collected amount
-        post.collected += amount
-        post.save()
-
-        # Record the donation
-        donation = Donation.objects.create(
-            user=request.user,
-            post=post,
-            amount=amount,
-            balance_after_donation=custom_user.balance
-        )
-
-        # Serialize the donation object and return the response
-        serializer = DonationSerializer(donation)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)

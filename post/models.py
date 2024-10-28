@@ -25,7 +25,7 @@ class Donation(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     donated_on = models.DateTimeField(auto_now_add=True)
     amount = models.IntegerField()
-    balance_after_donation = models.IntegerField()
+    transaction_id = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return f"{self.post.name} donated By {self.user.username}"
