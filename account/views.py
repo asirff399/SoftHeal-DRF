@@ -16,7 +16,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import filters, pagination
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 # Create your views here.
 
 class UserProfileUpdateApiView(APIView):
@@ -48,8 +49,8 @@ class UserProfileUpdateApiView(APIView):
 class CustomUserViewset(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['user__id']
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = {'user': ['exact']}
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()

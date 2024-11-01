@@ -29,6 +29,7 @@ class InitiatePaymentView(APIView):
         transaction_id = str(uuid.uuid4())
         post = get_object_or_404(Post, id=post_id)
         cus_user = CustomUser.objects.get(user=request.user)
+        print(request.user)
 
         settings = {'store_id': 'exipe6719a3b69d208', 'store_pass': 'exipe6719a3b69d208@ssl', 'issandbox': True }
 
@@ -90,7 +91,6 @@ def payment_success(request,user_id,post_id,amount,tran_id):
         return HttpResponse(f"Error updating post: {str(e)}", status=500)
     
     return render(request, "payment_success.html", {"amount": amount, "post": post , "tran_id": tran_id, "user":user})
-
 
 @csrf_exempt
 def payment_fail(request):

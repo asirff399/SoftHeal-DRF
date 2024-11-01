@@ -32,8 +32,6 @@ class DonationViewset(viewsets.ModelViewSet):
     queryset = Donation.objects.all()
     serializer_class = DonationSerializer
     # permission_classes = [IsAuthenticated]
-    # filter_backends = [filters.SearchFilter]
-    # search_fields = ['user__id','post__name']
 
     def get_queryset(self):
         user = self.request.user

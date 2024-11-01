@@ -6,7 +6,7 @@ from .constants import STAR_CHOICES,USER_TYPE_CHOICES
 
 class CustomUser(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,null=True,blank=True)
-    image = models.CharField(max_length=200) 
+    image = models.CharField(max_length=200,default='https://i.ibb.co.com/80NSbds/dummy-profile.png') 
     phone = models.DecimalField(default=0, max_digits=11, decimal_places=0)
     address = models.CharField(max_length=200)
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES,default='User')
@@ -17,7 +17,6 @@ class CustomUser(models.Model):
 
 class Review(models.Model):
     reviewer = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
-    # post = models.ForeignKey(Post,on_delete=models.CASCADE)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     rating = models.CharField(max_length=20,choices=STAR_CHOICES)
