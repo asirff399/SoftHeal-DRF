@@ -37,7 +37,6 @@ class DonationViewset(viewsets.ModelViewSet):
         user = self.request.user
         return Donation.objects.filter(user=user)
 
-
 class PostList(APIView):
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly] 
 

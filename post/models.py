@@ -29,4 +29,3 @@ class Donation(models.Model):
 
     def __str__(self):
         return f"{self.post.name} donated By {self.user.username}"
-

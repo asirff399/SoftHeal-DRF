@@ -15,7 +15,8 @@ class DonationSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(many=False)
     class Meta:
         model = Donation
-        fields = '__all__'
+        fields = ['user','post_name','amount','donated_on','transaction_id']
+        read_only_fields = ['donated_on', 'post_name']
 
 class PostTypeSerializer(serializers.ModelSerializer):
     class Meta:
