@@ -29,13 +29,11 @@ class PostTypeViewset(viewsets.ModelViewSet):
     serializer_class = PostTypeSerializer
 
 class DonationViewset(viewsets.ModelViewSet):
+    # permission_classes = [IsAuthenticated]
     queryset = Donation.objects.all()
     serializer_class = DonationSerializer
-    # permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        user = self.request.user
-        return Donation.objects.filter(user=user)
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['user__id']
 
 class PostList(APIView):
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly] 

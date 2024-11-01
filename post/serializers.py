@@ -11,7 +11,6 @@ class PostSerializer(serializers.ModelSerializer):
 
 class DonationSerializer(serializers.ModelSerializer):
     post_name = serializers.CharField(source='post.name', read_only=True)
-    post_image = serializers.CharField(source='post.image', read_only=True)
     user = serializers.StringRelatedField(many=False)
     class Meta:
         model = Donation
