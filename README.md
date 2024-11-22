@@ -40,9 +40,9 @@
     
      ⚡ View their donation history.
 
-### Donation History Dashboard
+### Donation History
 
-- A dedicated section that displays the user's donation history, providing a clear overview of their activity on the platform.
+- Here displays the user's donation history.
 
 ### Admin Controls
 
@@ -85,7 +85,6 @@
 
 
 
-
 ## 💻 Technology: 
 
 - Django
@@ -101,11 +100,11 @@ API Live link:
     https://github.com/asirff399/SoftHeal
 
 ## GitHub!
-Frontend: 
+Front-end Repo: 
 
     https://github.com/asirff399/SoftHeal
 
-Frontend live link:
+Front-end live link:
 
     https://softheal.netlify.app
 

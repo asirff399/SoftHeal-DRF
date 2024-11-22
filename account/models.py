@@ -23,5 +23,3 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Reviewer: {self.reviewer.user.first_name}; Pet: {self.pet.name}"
-
-    
