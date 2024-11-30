@@ -50,7 +50,11 @@
 
 ### Volunteer
 
--There was a volunteer register form. Where anyone can send a request to join us as a volunteer.
+- There was a volunteer register form. Where anyone can send a request to join us as a volunteer.
+
+### Admin Controls
+
+- Admin can see and manage important data, and edit or delete data but it not complete yet. I work on it and as soon as possible complete this.
 
 ## API Endpoints
 
